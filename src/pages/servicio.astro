@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Servicio - Masajes para Ti</title>
+</head>
+<body style="background: #fff5f7; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; color: #222;">
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Masajes para Ti</a>
+            <div class="nav-menu">
+                <a href="/modelo" class="nav-link">Modelo de Negocio</a>
+                <a href="/postulacion" class="nav-btn">Trabaja con Nosotras</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FORMULARIO DE SOLICITUD -->
+    <main class="page-container">
+        <div class="form-wrapper">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="color: #d63384; font-size: 2rem; margin-bottom: 0.5rem;">Personaliza tu Experiencia</h2>
+                <p style="color: #666; margin: 0;">Diseña tu sesión a la medida para garantizar un servicio único.</p>
+            </div>
+
+            <form id="clientForm" class="app-form">
+                <!-- 1. ALIAS CLIENTE -->
+                <div class="input-group">
+                    <label for="alias_cliente">Tu Alias o Nombre</label>
+                    <input type="text" id="alias_cliente" name="alias_cliente" required placeholder="Ej: Carlos M." />
+                </div>
+                <!-- NUEVOS CAMPOS: VALIDACIÓN DE ANTECEDENTES -->
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label for="fecha_nacimiento_cliente">Fecha de Nacimiento</label>
+                        <input type="date" id="fecha_nacimiento_cliente" name="fecha_nacimiento_cliente" required />
+                    </div>
+                
+                    <div class="input-group">
+                        <label for="cedula_cliente">Documento de Identidad (Cédula)</label>
+                        <input type="text" id="cedula_cliente" name="cedula_cliente" required placeholder="Ej: 10203040" />
+                    </div>
+                </div>
+
+                <!-- 2. TIPO DE SERVICIO -->
+                <div class="input-group">
+                    <label for="tipo_servicio">Tipo de Servicio Deseado</label>
+                    <select id="tipo_servicio" name="tipo_servicio" required>
+                        <option value="">-- Selecciona una opción --</option>
+                        <option value="Experiencia Labios y lengua">Experiencia Labios y lengua</option>
+                        <option value="Experiencia Penetrante + Labios y Lengua">Experiencia Penetrante + Labios y Lengua</option>
+                        <option value="Experiencia Penetrante Completa + Labios y Lengua">Experiencia Penetrante Completa + Labios y Lengua</option>
+                        <option value="Experiencia Co-Creada a la Medida">Experiencia Co-Creada a la Medida</option>
+                    </select>
+                </div>
+
+                <div class="grid-2">
+                    <!-- 3. DÍA -->
+                    <div class="input-group">
+                        <label for="dia_servicio">Día del Servicio</label>
+                        <input type="date" id="dia_servicio" name="dia_servicio" required />
+                    </div>
+
+                    <!-- 4. HORA -->
+                    <div class="input-group">
+                        <label for="hora_servicio">Hora del Servicio</label>
+                        <input type="time" id="hora_servicio" name="hora_servicio" required />
+                    </div>
+                </div>
+
+                <!-- 5. LUGAR DE ENCUENTRO -->
+                <div class="input-group">
+                    <label for="lugar_encuentro">Lugar de Encuentro / Dirección</label>
+                    <input type="text" id="lugar_encuentro" name="lugar_encuentro" required placeholder="Ej: Hotel, Domicilio, Zona..." />
+                </div>
+
+                <!-- 6. DETALLES ADICIONALES -->
+                <div class="input-group">
+                    <label for="detalles_adicionales">Experiencia - Detalles Adicionales (Acorde a lo permitido)</label>
+                    <textarea id="detalles_adicionales" name="detalles_adicionales" rows="4" required placeholder="Ingreso a la habitacion me va quitando la camisa mientras rosa mi cuerpo con su lengua, su cuerpo, ..."></textarea>
+                </div>
+
+                <button type="submit" id="submitClientBtn">Agendar Servicio por WhatsApp 🚀</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Cambia por tu número de WhatsApp de atención al cliente (Sin el +)
+        const WHATSAPP_PHONE = "573027645996"; 
+
+        const form = document.getElementById('clientForm') as HTMLFormElement;
+
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            // Plantilla de texto para el servicio del cliente
+            const messageTemplate = 
+`✨ *¡Nueva Solicitud de Servicio!* ✨
+
+👤 *Cliente (Alias):* ${formData.get('alias_cliente')}
+📅 *F. Nacimiento:* ${formData.get('fecha_nacimiento_cliente')}
+🪪 *Cédula:* ${formData.get('cedula_cliente')}
+💆‍♂️ *Tipo de Servicio:* ${formData.get('tipo_servicio')}
+📅 *Fecha:* ${formData.get('dia_servicio')}
+⏰ *Hora:* ${formData.get('hora_servicio')}
+📍 *Lugar de Encuentro:* ${formData.get('lugar_encuentro')}
+
+📝 *Detalles Adicionales:*
+${formData.get('detalles_adicionales')}`;
+
+            const encodedMessage = encodeURIComponent(messageTemplate);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
+
+            // NUEVA ALERTA DE CONFIRMACIÓN PARA EL CLIENTE
+            alert("¡Solicitud recibida! Tu propuesta de experiencia será enviada a las masajistas disponibles. Una vez alguna acepte la sesión, te estaremos avisando por este mismo medio.");
+
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    .navbar { position: sticky; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(214, 51, 132, 0.1); z-index: 1000; box-sizing: border-box; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.3rem; font-weight: 700; color: #d63384; text-decoration: none; }
+    .nav-link { color: #4f4f4f; text-decoration: none; font-size: 0.95rem; font-weight: 500; margin-right: 1.5rem; }
+    .nav-btn { background-color: #d63384; color: white; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; }
+    
+    .page-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; min-height: 85vh; padding: 3rem 1.5rem; box-sizing: border-box; }
+    .form-wrapper { width: 100%; max-width: 600px; display: flex; flex-direction: column; }
+    
+    .app-form { display: flex; flex-direction: column; gap: 1.2rem; background: #ffffff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eaeaea; }
+    .input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 480px) { .grid-2 { grid-template-columns: 1fr; } }
+    
+    label { font-weight: 600; font-size: 0.85rem; color: #444; }
+    input, select, textarea { padding: 0.7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; background-color: #fafafa; font-family: inherit; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #d63384; background-color: #fff; }
+    
+    button { background-color: #25D366; color: white; padding: 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-top: 1rem; transition: background-color 0.2s ease; }
+    button:hover { background-color: #1ebd58; }
+</style>

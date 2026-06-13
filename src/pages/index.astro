@@ -1,11 +1,334 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import JobForm from '../components/JobForm.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masajes para Ti - Trabaja con Nosotras</title>
+</head>
+<body style="background: #fff5f7; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; color: #222;">
+
+    <!-- MENÚ DE NAVEGACIÓN ACTUALIZADO -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Masajes para Ti</a>
+            <div class="nav-menu" style="display: flex; align-items: center;">
+                <a href="/modelo" class="nav-link">Modelo de Negocio</a>
+                <a href="/postulacion" class="nav-btn">Trabaja con Nosotras</a>
+            </div>
+        </div>
+    </nav>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="hero-container">
+        <!-- HEADER PRINCIPAL -->
+        <header class="text-center">
+            <h1>Masajes para Ti</h1>
+            <p class="description">
+                Somos un grupo de masajistas eróticas con experiencia, donde nuestros clientes son Fijos, Conocidos y Nuevos acorde a un sistema de calificación llevando cada servicio a una experiencia única llena de placer.
+            </p>
+        </header>
+        <!-- SECCIÓN DE ENLACES ACTUALIZADA A 3 OPCIONES -->
+        <div class="actions-wrapper triple-grid">
+            <!-- Enlace 1: Saber sobre el negocio -->
+            <a href="/modelo" class="home-card-btn secondary-btn">
+                <span class="icon">💡</span>
+                <span class="btn-title">¿Cómo es el negocio?</span>
+                <span class="btn-text">Mira cómo trabajamos y cómo se gana de forma justa.</span>
+            </a>
+        
+            <!-- Enlace 2: Agendar Servicio (NUEVO) -->
+            <a href="/servicio" class="home-card-btn client-btn">
+                <span class="icon">✨</span>
+                <span class="btn-title">Solicitar un Servicio</span>
+                <span class="btn-text">Personaliza tu masaje ideal de forma segura y discreta.</span>
+            </a>
+        
+            <!-- Enlace 3: Postularse -->
+            <a href="/postulacion" class="home-card-btn primary-btn">
+                <span class="icon">🚀</span>
+                <span class="btn-title">Trabaja con Nosotras</span>
+                <span class="btn-text">Llena el formulario aquí para empezar tu proceso hoy.</span>
+            </a>
+        </div>
+        
+
+    </main>
+
+</body>
+
+</html>
+
+<style>
+    .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+    header {
+        text-align: center;
+        max-width: 750px;
+        margin-bottom: 3rem;
+    }
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        margin-bottom: 1rem;
+        color: #d63384; /* Un tono elegante en la gama del rosa/fucsia corporativo */
+    }
+    .description {
+        font-size: 1.15rem;
+        line-height: 1.6;
+        color: #4f4f4f;
+    }
+    .form-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px); /* Efecto difuminado moderno */
+        border-bottom: 1px solid rgba(214, 51, 132, 0.1);
+        z-index: 1000;
+        box-sizing: border-box;
+    }
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #d63384;
+        text-decoration: none;
+        letter-spacing: -0.03em;
+    }
+    .nav-btn {
+        background-color: #d63384;
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px; /* Botón ovalado moderno */
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 10px rgba(214, 51, 132, 0.15);
+    }
+    .nav-btn:hover {
+        background-color: #b8236c;
+        transform: translateY(-1px);
+    }
+
+    /* --- AJUSTE AL CONTENEDOR PRINCIPAL --- */
+    .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 90vh;
+        padding: 2rem 1.5rem 5rem 1.5rem; /* Margen inferior para que respire el formulario */
+    }
+
+    /* Agrega este pequeño truco para que al dar clic en el menú, el formulario no quede tapado */
+    .form-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        scroll-margin-top: 100px;
+    }
+
+    /* --- ESTILOS DEL ENLACE AL MODELO --- */
+    .nav-link {
+        color: #4f4f4f;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-right: 1.5rem;
+        transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+        color: #d63384;
+    }
+
+    /* --- ESTILOS DE LA SECCIÓN MODELO DE NEGOCIO --- */
+    .model-section {
+        width: 100%;
+        max-width: 850px;
+        margin: 3rem 0;
+        scroll-margin-top: 100px; /* Evita que el menú tape el título al hacer clic */
+        box-sizing: border-box;
+    }
+    .model-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(214, 51, 132, 0.03);
+        border: 1px solid rgba(214, 51, 132, 0.06);
+    }
+    .model-card h2 {
+        color: #d63384;
+        font-size: 1.8rem;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+        text-align: center;
+        letter-spacing: -0.02em;
+    }
+    .model-intro {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #555;
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+    .grid-model {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .model-pillar {
+        background: #fff5f7;
+        padding: 1.8rem;
+        border-radius: 12px;
+        border-top: 4px solid #d63384;
+    }
+    .model-pillar h3 {
+        margin-top: 0;
+        color: #111;
+        font-size: 1.15rem;
+        margin-bottom: 0.7rem;
+    }
+    .model-pillar p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #444;
+        margin-bottom: 0;
+    }
+
+    /* Responsivo para celulares */
+    @media (max-width: 768px) {
+        .grid-model {
+            grid-template-columns: 1fr;
+        }
+        .model-card {
+            padding: 2rem 1.5rem;
+        }
+    }
+    /* --- ESTILOS DE LOS BOTONES GRANDES EN EL HOME --- */
+    .actions-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 750px;
+        margin-top: 2rem;
+    }
+    .home-card-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        box-sizing: border-box;
+    }
+    .home-card-btn .icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+    .home-card-btn .btn-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    .home-card-btn .btn-text {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        opacity: 0.9;
+    }
+    
+    /* Botón Primario (Fucsia llamativo) */
+    .primary-btn {
+        background-color: #d63384;
+        color: white;
+        box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+    }
+    .primary-btn:hover {
+        background-color: #b8236c;
+        transform: translateY(-3px);
+    }
+    
+    /* Botón Secundario (Blanco con borde elegante) */
+    .secondary-btn {
+        background-color: white;
+        color: #222;
+        border: 2px solid rgba(214, 51, 132, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+    .secondary-btn .btn-title {
+        color: #d63384;
+    }
+    .secondary-btn:hover {
+        background-color: #fff5f7;
+        border-color: #d63384;
+        transform: translateY(-3px);
+    }
+    
+    /* Adaptación para celulares */
+    @media (max-width: 600px) {
+        .actions-wrapper {
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+        .home-card-btn {
+            padding: 1.5rem;
+        }
+    }
+    /* Modifica o añade para admitir 3 columnas */
+    .triple-grid {
+        grid-template-columns: 1fr 1fr 1fr !important;
+        max-width: 950px !important;
+    }
+    
+    /* Nuevo botón de servicio para clientes */
+    .client-btn {
+        background-color: #222;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    .client-btn .btn-title {
+        color: #fff;
+    }
+    .client-btn:hover {
+        background-color: #444;
+        transform: translateY(-3px);
+    }
+    
+    /* Ajuste móvil para que las 3 cajas se apilen */
+    @media (max-width: 768px) {
+        .triple-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
