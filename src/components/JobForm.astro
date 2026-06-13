@@ -15,11 +15,22 @@
     </div>
   </div>
   
-    <!-- NUEVO CAMPO: DOCUMENTO DE IDENTIDAD PARA ANTECEDENTES -->
+  <div class="grid-2">
     <div class="input-group">
-      <label for="cedula_postulante">Documento de Identidad (Cédula)</label>
+      <label for="tipo_documento">Tipo de Documento</label>
+      <select id="tipo_documento" name="tipo_documento" required>
+        <option value="">-- Seleccione --</option>
+        <option value="Cédula de Ciudadanía">Cédula de Ciudadanía (Colombia)</option>
+        <option value="PPT">PPT - Permiso por Protección Temporal (Venezuela)</option>
+        <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="cedula_postulante">Número de Documento</label>
       <input type="text" id="cedula_postulante" name="cedula_postulante" required placeholder="Ej: 10203040" />
     </div>
+  </div>
 
   <div class="grid-2">
     <div class="input-group">
@@ -35,6 +46,21 @@
 
   <div class="grid-2">
     <div class="input-group">
+      <label for="ubicacion_cundinamarca">¿En qué zona o ciudad vives?</label>
+      <select id="ubicacion_cundinamarca" name="ubicacion_cundinamarca" required>
+        <option value="">-- Seleccione Ubicación --</option>
+        <option value="Soacha">Soacha</option>
+        <option value="Madrid">Madrid</option>
+        <option value="Mosquera">Mosquera</option>
+        <option value="Funza">Funza</option>
+        <option value="Facatativá">Facatativá</option>
+        <option value="Bogotá (Sur)">Bogotá (Zonas del Sur)</option>
+        <option value="Bogotá (Norte/Centro)">Bogotá (Zonas Norte o Centro)</option>
+        <option value="Otro municipio">Otro municipio cercano</option>
+      </select>
+    </div>
+
+    <div class="input-group">
       <label for="estado_civil">Estado Civil</label>
       <select id="estado_civil" name="estado_civil" required>
         <option value="">-- Seleccione --</option>
@@ -42,7 +68,9 @@
         <option value="Con pareja">Con pareja</option>
       </select>
     </div>
+  </div>
 
+  <div class="grid-2">
     <div class="input-group">
       <label for="genero">Género</label>
       <select id="genero" name="genero" required>
@@ -51,30 +79,10 @@
         <option value="Trans">Trans</option>
       </select>
     </div>
-  </div>
 
-  <div class="grid-3">
     <div class="input-group">
       <label for="tiene_hijos">¿Tiene hijos?</label>
       <select id="tiene_hijos" name="tiene_hijos" required>
-        <option value="">-- Seleccione --</option>
-        <option value="Sí">Sí</option>
-        <option value="No">No</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label for="experiencia">¿Ha trabajado en esto antes?</label>
-      <select id="experiencia" name="experiencia" required>
-        <option value="">-- Seleccione --</option>
-        <option value="Sí">Sí</option>
-        <option value="No">No</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label for="estudios">¿Tiene estudios relacionados?</label>
-      <select id="estudios" name="estudios" required>
         <option value="">-- Seleccione --</option>
         <option value="Sí">Sí</option>
         <option value="No">No</option>
@@ -84,13 +92,35 @@
 
   <div class="grid-2">
     <div class="input-group">
-      <label for="ultimo_salario">¿Cuál fue su último pago por hora? (Pesos COP)</label>
-      <input type="number" id="ultimo_salario" name="ultimo_salario" min="0" required placeholder="Ej: 1500000" />
+      <label for="experiencia">¿Ha trabajado en esto antes?</label>
+      <select id="experiencia" name="experiencia" required>
+        <option value="">-- Seleccione --</option>
+        <option value="Sí (De forma empírica / Tengo la técnica)">Sí (Empírica / Tengo la técnica)</option>
+        <option value="Sí (En Spas o centros de estética)">Sí (En Spas / Estética)</option>
+        <option value="No, pero quiero aprender">No, pero quiero aprender</option>
+      </select>
     </div>
 
     <div class="input-group">
-      <label for="porcentaje_descuento">¿Cuál es el porcentaje de descuento sobre el pagoXhora?</label>
-      <input type="number" id="porcentaje_descuento" name="porcentaje_descuento" min="0" max="100" required placeholder="Ej: 10" />
+      <label for="estudios">¿Tiene estudios relacionados?</label>
+      <select id="estudios" name="estudios" required>
+        <option value="">-- Seleccione --</option>
+        <option value="Sí (Técnico / Profesional)">Sí (Técnico / Profesional)</option>
+        <option value="Sí (Cursos cortos / Talleres)">Sí (Cursos cortos / Talleres)</option>
+        <option value="No">No tiene estudios formales</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="input-group">
+      <label for="ultimo_salario">Último pago por hora (COP)</label>
+      <input type="number" id="ultimo_salario" name="ultimo_salario" min="0" required placeholder="Ej: 50000" />
+    </div>
+
+    <div class="input-group">
+      <label for="porcentaje_descuento">% descuento cobrado por el Spa</label>
+      <input type="number" id="porcentaje_descuento" name="porcentaje_descuento" min="0" max="100" required placeholder="Ej: 30" />
     </div>
 
     <div class="input-group">
@@ -108,7 +138,7 @@
 </form>
 
 <script>
-  const WHATSAPP_PHONE = "573027645996"; 
+  const WHATSAPP_PHONE = "573027645996";  
 
   const form = document.getElementById('applicationForm') as HTMLFormElement;
 
@@ -119,27 +149,45 @@
 
     // Formatear salario a formato COP nativo ($1.500.000)
     const salarioCrudo = formData.get('ultimo_salario') as string;
-    const salarioFormateado = new Intl.NumberFormat('es-CO', { 
-      style: 'currency', 
-      currency: 'COP', 
-      maximumFractionDigits: 0 
+    const salarioFormateado = new Intl.NumberFormat('es-CO', {  
+      style: 'currency',  
+      currency: 'COP',  
+      maximumFractionDigits: 0  
     }).format(Number(salarioCrudo));
 
-    // Construir mensaje directo estructurado
-    const messageTemplate = 
-`📝 *¡Nueva Postulación Recibida!*
+    const fechaNacimientoCruda = formData.get('birth_date') as string;
+    let edadTexto = "";
+    
+    if (fechaNacimientoCruda) {
+      const hoy = new Date();
+      const cumpleanos = new Date(fechaNacimientoCruda);
+    
+      let edad = hoy.getFullYear() - cumpleanos.getFullYear();
+      const mes = hoy.getMonth() - cumpleanos.getMonth();
+    
+      if (mes < 0 || (mes === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+      }
+    
+      edadTexto = ` (${edad} años)`;
+    }
+
+    // Construir mensaje directo estructurado incluyendo los nuevos filtros SEO e inclusivos
+    const messageTemplate =  
+`📝 *¡Nueva Postulación Recibida (Masajes para Ti)!*
 
 👤 *Nombre:* ${formData.get('nombre_completo')}
-🪪 *Cédula:* ${formData.get('cedula_postulante')}
 🎭 *Alias:* ${formData.get('alias')}
-📅 *F. Nacimiento:* ${formData.get('birth_date')}
-📍 *Lugar Nacimiento:* ${formData.get('birth_place')}
+🪪 *Documento:* ${formData.get('tipo_documento')} - ${formData.get('cedula_postulante')}
+📍 *Ubicación:* ${formData.get('ubicacion_cundinamarca')}
+📅 *F. Nacimiento:* ${formData.get('birth_date')}${edadTexto}
+🗺️ *Lugar Nacimiento:* ${formData.get('birth_place')}
 💍 *Estado Civil:* ${formData.get('estado_civil')}
 🧬 *Género:* ${formData.get('genero')}
 👶 *Tiene Hijos:* ${formData.get('tiene_hijos')}
-💼 *Experiencia Previa:* ${formData.get('experiencia')}
-🎓 *Estudios Relacionados:* ${formData.get('estudios')}
-💵 *Último Pago:* ${salarioFormateado}
+💼 *Experiencia:* ${formData.get('experiencia')}
+🎓 *Estudios:* ${formData.get('estudios')}
+💵 *Último Pago/Hora:* ${salarioFormateado}
 📉 *Porcentaje Descuento:* ${formData.get('porcentaje_descuento')}%
 🏠 *Modalidad:* ${formData.get('modalidad')}`;
 
@@ -147,7 +195,7 @@
     const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
 
     // 1. Mostrar alerta al usuario solicitando las imágenes manuales
-    alert("Se abrirá WhatsApp. En el chat, recuerda adjuntar las imágenes que desees agregar a tu postulación.");
+    alert("Se abrirá WhatsApp. En el chat, recuerda adjuntar tu documento (Cédula o PPT) y tus certificaciones si dispones de ellas.");
 
     // 2. Abrir la ventana de chat nativa inmediatamente
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
