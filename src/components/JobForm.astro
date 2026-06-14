@@ -209,13 +209,16 @@
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    width: 100%; /* Ocupa todo el ancho disponible */
     max-width: 600px;
+    margin: 0 auto; /* Centra el formulario en la pantalla */
     background: #ffffff;
-    padding: 2.5rem;
+    padding: 1.5rem; /* Reducido para que quepa mejor en pantallas pequeñas */
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     border: 1px solid #eaeaea;
     font-family: system-ui, sans-serif;
+    box-sizing: border-box;
   }
   .input-group {
     display: flex;
@@ -232,11 +235,17 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
   }
-  @media (max-width: 480px) {
+
+  /* MEDIA QUERY: Aplica a pantallas de 600px o menos (móviles) */
+  @media (max-width: 600px) {
     .grid-2, .grid-3 {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; /* Fuerza a todos los campos a ponerse uno abajo del otro */
+    }
+    .app-form {
+      padding: 1rem; /* Margen interno más pequeño para dar más espacio al contenido */
     }
   }
+
   label {
     font-weight: 600;
     font-size: 0.85rem;
@@ -248,6 +257,8 @@
     border-radius: 6px;
     font-size: 0.95rem;
     background-color: #fafafa;
+    width: 100%; /* Evita que los inputs se desborden */
+    box-sizing: border-box;
   }
   input:focus, select:focus {
     outline: none;
@@ -265,6 +276,7 @@
     font-size: 1rem;
     margin-top: 1rem;
     transition: background-color 0.2s ease;
+    width: 100%;
   }
   button:hover {
     background-color: #1ebd58;
